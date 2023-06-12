@@ -4,18 +4,85 @@
     <title>iframe test</title>
   </head>
   <body style="height: 100vh">
-    <iframe id="iframe" width="100%" height="100%"></iframe>
-
+    <div id="ifff">
+      <!-- <iframe
+        id="iframe"
+        width="100%"
+        height="100%"
+        <!--
+        src="http://localhost:9002/app/messenger/?operatorConsoleFlow=true&number=2053524811&last_name=Romero1&first_name=944Frank111453&email=franlopz@me.com&user_name=flopez@tigerconnect.partner&apiEnv=uat"
+        --
+      >
+        ></iframe -->
+      >
+    </div>
+    <button onclick="hide()">Hide</button>
+    <button onclick="show()">Show</button>
+    <button onclick="post()">postMessage</button>
     <script>
-      // Get the value of the 'url' parameter from the URL query string
-      const urlParams = new URLSearchParams(window.location.search);
-      const searchQuery = urlParams.get("url");
-
-      // If a search query is present, set it as the src of the iframe
-      if (searchQuery) {
-        const iframe = document.getElementById("iframe");
-        iframe.src = searchQuery;
+      function hide() {
+        document.getElementById("ifff").style.display = "none";
       }
+
+      function post() {
+        window.parent.postMessage(
+          {
+            id: "tigerConnect",
+            message: "You have a new message",
+          },
+          "*"
+        );
+      }
+
+      function show() {
+        document.getElementById("ifff").style.display = "block";
+      }
+      const a = () => {
+        const url =
+          "https://uat-saml-lb.tigertext.me/v1/organization/BHqcxNd0zAJukevNPQZ8CI92/saml/consume";
+
+        fetch(url, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+          body: new URLSearchParams({
+            SAMLResponse:
+              "​PHNhbWxwOlJlc3BvbnNlIElEPSJfZmZlYjdjMTUtMDkxYi00YmU5LWI2MzgtNTc3YjY0ZDhiZDBhIiBWZXJzaW9uPSIyLjAiIElzc3VlSW5zdGFudD0iMjAyMy0wNS0yNFQxOTo1ODo0NS42NDFaIiBEZXN0aW5hdGlvbj0iaHR0cHM6Ly91YXQtc2FtbC1sYi50aWdlcnRleHQubWUvdjEvb3JnYW5pemF0aW9uL0JIcWN4TmQwekFKdWtldk5QUVo4Q0k5Mi9zYW1sL2NvbnN1bWUiIEluUmVzcG9uc2VUbz0iaWQ0Nzc4MDJmOC01ZTRhLTQxZWQtODg1MC05YzY5NjhiNDlmMGUiIHhtbG5zOnNhbWxwPSJ1cm46b2FzaXM6bmFtZXM6dGM6U0FNTDoyLjA6cHJvdG9jb2wiPjxJc3N1ZXIgeG1sbnM9InVybjpvYXNpczpuYW1lczp0YzpTQU1MOjIuMDphc3NlcnRpb24iPmh0dHBzOi8vc3RzLndpbmRvd3MubmV0Lzg3MzZkOWI1LWViNGMtNGVjMy04ZWMyLTBhNjc2NmRlMDNlNS88L0lzc3Vlcj48c2FtbHA6U3RhdHVzPjxzYW1scDpTdGF0dXNDb2RlIFZhbHVlPSJ1cm46b2FzaXM6bmFtZXM6dGM6U0FNTDoyLjA6c3RhdHVzOlN1Y2Nlc3MiLz48L3NhbWxwOlN0YXR1cz48QXNzZXJ0aW9uIElEPSJfODdiYmQxNzItYjZlMi00NDQ3LTgwNGEtZDMzNjA1MzkwZTAwIiBJc3N1ZUluc3RhbnQ9IjIwMjMtMDUtMjRUMTk6NTg6NDUuNjM1WiIgVmVyc2lvbj0iMi4wIiB4bWxucz0idXJuOm9hc2lzOm5hbWVzOnRjOlNBTUw6Mi4wOmFzc2VydGlvbiI%2BPElzc3Vlcj5odHRwczovL3N0cy53aW5kb3dzLm5ldC84NzM2ZDliNS1lYjRjLTRlYzMtOGVjMi0wYTY3NjZkZTAzZTUvPC9Jc3N1ZXI%2BPFNpZ25hdHVyZSB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC8wOS94bWxkc2lnIyI%2BPFNpZ25lZEluZm8%2BPENhbm9uaWNhbGl6YXRpb25NZXRob2QgQWxnb3JpdGhtPSJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzEwL3htbC1leGMtYzE0biMiLz48U2lnbmF0dXJlTWV0aG9kIEFsZ29yaXRobT0iaHR0cDovL3d3dy53My5vcmcvMjAwMS8wNC94bWxkc2lnLW1vcmUjcnNhLXNoYTI1NiIvPjxSZWZlcmVuY2UgVVJJPSIjXzg3YmJkMTcyLWI2ZTItNDQ0Ny04MDRhLWQzMzYwNTM5MGUwMCI%2BPFRyYW5zZm9ybXM%2BPFRyYW5zZm9ybSBBbGdvcml0aG09Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvMDkveG1sZHNpZyNlbnZlbG9wZWQtc2lnbmF0dXJlIi8%2BPFRyYW5zZm9ybSBBbGdvcml0aG09Imh0dHA6Ly93d3cudzMub3JnLzIwMDEvMTAveG1sLWV4Yy1jMTRuIyIvPjwvVHJhbnNmb3Jtcz48RGlnZXN0TWV0aG9kIEFsZ29yaXRobT0iaHR0cDovL3d3dy53My5vcmcvMjAwMS8wNC94bWxlbmMjc2hhMjU2Ii8%2BPERpZ2VzdFZhbHVlPnkzclpmZmMwTy9rQjB4WnpBMk1wSmh6aHJISWkxMktweTdSYUV0ak5KUWc9PC9EaWdlc3RWYWx1ZT48L1JlZmVyZW5jZT48L1NpZ25lZEluZm8%2BPFNpZ25hdHVyZVZhbHVlPmV1djY1ZlZRZjNJZjJ6QmdDQnJKZGJUS0NsM2hOb1hCSXp6RE1oajYzUkpuY1E4Y2IvSlREem9GVUdtSDJUSHNhdUU5SzU0WndqQ2FuTlJGWHJZSXhsWmxGcVpJblpkWElCK0Q3SG9VQk03WFhjRkdvRWwwQ04xQ3dSNGxZdmcvSVlKQktNaWp3dStjc3lrN1dnQzFwcS8xZkpKaktDQ0dzd1dHNDdEMWRmL2IreFdGREJjWVBHN1Z5WTFFTkVlY3huVDJtaW5IN1A3cGo3ZWI5ajZESXQ0a3dtZVRIREh1bGY5OGl5eG1UdDFUOHFMZDd3L3pYdWd1TWJaYjhMQmVFTjlOK0xzUkV6a1g3MGlhRmxYQWx2YUQ3Z1BNbWtvR1ZqRktVcEF0MWtUekc3WlJUUzgrZjdia3dyNDFJQnBBTkprTnFzUUoreWZEbU1NcG9HZzNYUT09PC9TaWduYXR1cmVWYWx1ZT48S2V5SW5mbz48WDUwOURhdGE%2BPFg1MDlDZXJ0aWZpY2F0ZT5NSUlDOERDQ0FkaWdBd0lCQWdJUWZranMvVzNXazVORjY3Rnp6SFNhTVRBTkJna3Foa2lHOXcwQkFRc0ZBREEwTVRJd01BWURWUVFERXlsTmFXTnliM052Wm5RZ1FYcDFjbVVnUm1Wa1pYSmhkR1ZrSUZOVFR5QkRaWEowYVdacFkyRjBaVEFlRncweU16QTFNRGt3TlRFek5EZGFGdzB5TmpBMU1Ea3dOVEV6TkRkYU1EUXhNakF3QmdOVkJBTVRLVTFwWTNKdmMyOW1kQ0JCZW5WeVpTQkdaV1JsY21GMFpXUWdVMU5QSUVObGNuUnBabWxqWVhSbE1JSUJJakFOQmdrcWhraUc5dzBCQVFFRkFBT0NBUThBTUlJQkNnS0NBUUVBNDN5Q01FajVERmk1QmduZnJqMTZtYXluS0M4YktDeUJJaTM2UU1hTG5rL3dVVElYTTMxVXRoS1k3U1g4c3FYU2FTKzlOTzB5UzBsY0hZS3hjbCsxQkVsQ0x0WGNQVHVtdEpuVm5ZTUpGcE9YNml3dkpISWU2WUxsbVp4OXpsMlNZcldYSXM3YWhYOGNtR2ovNEFPK2RIdXU1aUh1S2JlMDdpTlVsblprTUZjaUowREt1dlR0U3Zvb0wxekxYWE5YR0oxWjNYSW1kREc1TVE5OTlVQkx3TXpvRlBUUDJZTGFNeVZHMjlLNXBPQlRWWWxpai96dUU0anE5dWIyTmJMazY1RmtuMloxQ1pQU3RDZENhZzJUK0Y5S0FCZ1psZTFYdFltbmxyM25GRFlidHNXMlphWHBiRVc5TEZVQVhESEZqYzJPTCtYbUJ3TW1aaTZQNS9wcXFRSURBUUFCTUEwR0NTcUdTSWIzRFFFQkN3VUFBNElCQVFBeklZOEZKSmUxeVE4VFdTTlErOEM0dkRiM25pMTV5Uko0QU1mZ2NYN2xDWEs0MC8yc1RWQ1l0YzZzbTExWlRYSko4WjJjVDFwWkVPUU5SRkFKaEM1MDRVM1Jvays0OUNCMW8wZWEveXQ5N25tY3pLa2FMY2FSUDVhVDVVL3pHc0VEem1XTFVGT3Bza0d4WlpIZ2V2WDZQWWRlTXEwb0grOW9JeXhjeDFHS25PQmpmRGY2M1VibUpEbW1sVWdrTHFmOFQxUEU2eTdsakdDUDM2YjA5aDdVWms3QUdZWE5sREZSam5rcnJJbEJpYjZBcDZhdHlJRjQ1UDlqcEI1dGVnZWQrM2RSZlR4Y09HVVd3SWFUZkpiTTFhbmhaQUxYZHozdWhYUVFqdS9KcWh0UzFKTkYrK1RPTU5IZEpwdzhtdVlPVURhc2p2b3cxOVVVa2htd1pKeUQ8L1g1MDlDZXJ0aWZpY2F0ZT48L1g1MDlEYXRhPjwvS2V5SW5mbz48L1NpZ25hdHVyZT48U3ViamVjdD48TmFtZUlEIEZvcm1hdD0idXJuOm9hc2lzOm5hbWVzOnRjOlNBTUw6MS4xOm5hbWVpZC1mb3JtYXQ6ZW1haWxBZGRyZXNzIj5mbG9wZXpAZnJhbmpscGhvdG1haWwub25taWNyb3NvZnQuY29tPC9OYW1lSUQ%2BPFN1YmplY3RDb25maXJtYXRpb24gTWV0aG9kPSJ1cm46b2FzaXM6bmFtZXM6dGM6U0FNTDoyLjA6Y206YmVhcmVyIj48U3ViamVjdENvbmZpcm1hdGlvbkRhdGEgSW5SZXNwb25zZVRvPSJpZDQ3NzgwMmY4LTVlNGEtNDFlZC04ODUwLTljNjk2OGI0OWYwZSIgTm90T25PckFmdGVyPSIyMDIzLTA1LTI0VDIwOjU4OjQ1LjUwN1oiIFJlY2lwaWVudD0iaHR0cHM6Ly91YXQtc2FtbC1sYi50aWdlcnRleHQubWUvdjEvb3JnYW5pemF0aW9uL0JIcWN4TmQwekFKdWtldk5QUVo4Q0k5Mi9zYW1sL2NvbnN1bWUiLz48L1N1YmplY3RDb25maXJtYXRpb24%2BPC9TdWJqZWN0PjxDb25kaXRpb25zIE5vdEJlZm9yZT0iMjAyMy0wNS0yNFQxOTo1Mzo0NS41MDdaIiBOb3RPbk9yQWZ0ZXI9IjIwMjMtMDUtMjRUMjA6NTg6NDUuNTA3WiI%2BPEF1ZGllbmNlUmVzdHJpY3Rpb24%2BPEF1ZGllbmNlPmh0dHBzOi8vdWF0LXNhbWwtbGIudGlnZXJ0ZXh0Lm1lL3YxL29yZ2FuaXphdGlvbi9CSHFjeE5kMHpBSnVrZXZOUFFaOENJOTIvc2FtbC9tZXRhZGF0YTwvQXVkaWVuY2U%2BPC9BdWRpZW5jZVJlc3RyaWN0aW9uPjwvQ29uZGl0aW9ucz48QXR0cmlidXRlU3RhdGVtZW50PjxBdHRyaWJ1dGUgTmFtZT0iaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS9pZGVudGl0eS9jbGFpbXMvdGVuYW50aWQiPjxBdHRyaWJ1dGVWYWx1ZT44NzM2ZDliNS1lYjRjLTRlYzMtOGVjMi0wYTY3NjZkZTAzZTU8L0F0dHJpYnV0ZVZhbHVlPjwvQXR0cmlidXRlPjxBdHRyaWJ1dGUgTmFtZT0iaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS9pZGVudGl0eS9jbGFpbXMvb2JqZWN0aWRlbnRpZmllciI%2BPEF0dHJpYnV0ZVZhbHVlPjYxZTY4ZjhjLTQ4NzMtNDVhNi05NDRmLTY0MDBhMmYzNjQ4ODwvQXR0cmlidXRlVmFsdWU%2BPC9BdHRyaWJ1dGU%2BPEF0dHJpYnV0ZSBOYW1lPSJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL2lkZW50aXR5L2NsYWltcy9kaXNwbGF5bmFtZSI%2BPEF0dHJpYnV0ZVZhbHVlPmZyYW48L0F0dHJpYnV0ZVZhbHVlPjwvQXR0cmlidXRlPjxBdHRyaWJ1dGUgTmFtZT0iaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS9pZGVudGl0eS9jbGFpbXMvaWRlbnRpdHlwcm92aWRlciI%2BPEF0dHJpYnV0ZVZhbHVlPmh0dHBzOi8vc3RzLndpbmRvd3MubmV0Lzg3MzZkOWI1LWViNGMtNGVjMy04ZWMyLTBhNjc2NmRlMDNlNS88L0F0dHJpYnV0ZVZhbHVlPjwvQXR0cmlidXRlPjxBdHRyaWJ1dGUgTmFtZT0iaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS9jbGFpbXMvYXV0aG5tZXRob2RzcmVmZXJlbmNlcyI%2BPEF0dHJpYnV0ZVZhbHVlPmh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9hdXRoZW50aWNhdGlvbm1ldGhvZC9wYXNzd29yZDwvQXR0cmlidXRlVmFsdWU%2BPC9BdHRyaWJ1dGU%2BPEF0dHJpYnV0ZSBOYW1lPSJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIj48QXR0cmlidXRlVmFsdWU%2BZmxvcGV6QGZyYW5qbHBob3RtYWlsLm9ubWljcm9zb2Z0LmNvbTwvQXR0cmlidXRlVmFsdWU%2BPC9BdHRyaWJ1dGU%2BPC9BdHRyaWJ1dGVTdGF0ZW1lbnQ%2BPEF1dGhuU3RhdGVtZW50IEF1dGhuSW5zdGFudD0iMjAyMy0wNS0yNFQxOTozOToyNy4xMDJaIiBTZXNzaW9uSW5kZXg9Il84N2JiZDE3Mi1iNmUyLTQ0NDctODA0YS1kMzM2MDUzOTBlMDAiPjxBdXRobkNvbnRleHQ%2BPEF1dGhuQ29udGV4dENsYXNzUmVmPnVybjpvYXNpczpuYW1lczp0YzpTQU1MOjIuMDphYzpjbGFzc2VzOlBhc3N3b3JkPC9BdXRobkNvbnRleHRDbGFzc1JlZj48L0F1dGhuQ29udGV4dD48L0F1dGhuU3RhdGVtZW50PjwvQXNzZXJ0aW9uPjwvc2FtbHA6UmVzcG9uc2U%2B",
+            password: "Password!",
+            grant_type: "password",
+          }),
+        });
+      };
+      // a();
+      // const urlParams = new URLSearchParams(window.location.search);
+
+      // const idpUrl = urlParams.get("idpUrl");
+      // const serviceUrl = urlParams.get("serviceUrl");
+      // const encodedAuth = urlParams.get("encodedAuth");
+      // console.log(idpUrl, encodedAuth, serviceUrl);
+
+      // let authorization;
+
+      // const options = {
+      //   method: "POST",
+      //   headers: {
+      //     Authorization: `Basic ${encodedAuth}`,
+      //   },
+      //   body: new URLSearchParams({ grant_type: "client_credentials" }),
+      // };
+
+      // fetch("https://idp.env7.tigerconnect.com/connect/token", options)
+      //   .then((response) => response.json())
+      //   .then((response) => {
+      //     const fullUrl = `${serviceUrl}${window.location.search}&authorization=${response.access_token}`;
+      //     console.log(fullUrl);
+      //     fetch(fullUrl, { method: "GET" })
+      //       .then((response) => response.json())
+      //       .then((response) => console.log(response))
+      //       .catch((err) => console.error(err));
+      //   })
+      //   .catch((err) => console.error(err));
     </script>
   </body>
 </html>
