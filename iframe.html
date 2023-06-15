@@ -4,10 +4,10 @@
     <title>iframe test</title>
   </head>
   <body>
-    <button onclick="openPage()">Directory</button>
-    <button onclick="openPage()">On-Call Schedule</button>
-    <button onclick="openPage()">Start Group Video</button>
-    <button onclick="openPage()">Send Virtual Waiting Room Link</button>
+    <button onclick="hide()">Directory</button>
+    <button onclick="hide()">On-Call Schedule</button>
+    <button onclick="show()">Start Group Video</button>
+    <button onclick="getQueryParams()">Send Virtual Waiting Room Link</button>
     <button onclick="sendSecureSms()">Send Secure SMS</button>
     <script>
       function getQueryParams() {
@@ -25,10 +25,6 @@
 
       function sendSecureSms() {
         window.location = `https://login.tigerconnect.xyz/app/messenger/${getQueryParams()}`;
-      }
-
-      function openPage() {
-        window.location = "https://tigerconnect.com";
       }
     </script>
   </body>
